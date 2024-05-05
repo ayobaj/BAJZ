@@ -5,11 +5,13 @@ import SignIn from './Pages/SignIn'
 import SignUp from './Pages/SignUp'
 import Dashboard from './Pages/Dashboard'
 import Projects from './Pages/Projects'
+import NavBar from './components/NavBar'
+
 
 const App = () => {
 return (
     <div>
-
+        <NavBar/>
         <Routes>
             <Route path='/' element={<Home/>} />
             <Route path='/about' element={<About/>} />
@@ -18,7 +20,7 @@ return (
             <Route path='/dashboard' element={<Dashboard/>} />
             <Route path='/projects' element={<Projects/>} />
         </Routes>
-        
+
     </div>
 )
 }
