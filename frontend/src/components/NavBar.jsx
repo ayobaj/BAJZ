@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import image from "../assets/nav.png"
 import {AiOutlineSearch} from "react-icons/ai";
 import { RiMenu4Line } from "react-icons/ri";
@@ -10,6 +10,8 @@ import { IoCloseSharp } from "react-icons/io5";
 const NavBar = () => {
 
   const [show, setShow] = useState(false);
+
+  const path = useLocation.pathname;
 
   const handleLinkClick = () => {
     setShow(false);
@@ -26,15 +28,15 @@ const NavBar = () => {
 
           {show && <div className="md:hidden text-white font-semibold text-xl md:static md:min-h-fit absolute md:w-auto bg-indigo-400 md:bg-white min-h-[50vh] left-0 top-[9.7%] w-full flex items-center justify-center">
           <div className="flex items-center md:gap-[50px] md:flex-row flex-col gap-10">
-            <Link to={'/'} onClick={handleLinkClick} >
+            <Link to={'/'} onClick={handleLinkClick} className="hover:underline">
               Home
             </Link>
 
-            <Link to={'/about'} onClick={handleLinkClick}>
+            <Link to={'/about'} onClick={handleLinkClick}className="hover:underline">
               About
             </Link>
 
-            <Link to={'/projects'} onClick={handleLinkClick}>
+            <Link to={'/projects'} onClick={handleLinkClick}className="hover:underline">
               Projects 
             </Link>
           </div>
@@ -48,15 +50,15 @@ const NavBar = () => {
 
         <div className="md:static md:min-h-fit absolute md:w-auto bg-indigo-400 md:bg-white min-h-[60vh] left-0 top-[-100%] w-full flex items-center justify-center">
           <div className="flex items-center md:gap-[50px] md:flex-row flex-col gap-10 font-semibold text-lg text-indigo-400">
-            <Link to={'/'}>
+            <Link to={'/'} className="hover:underline ">
               Home
             </Link>
 
-            <Link to={'/about'}>
+            <Link to={'/about'} className="hover:underline">
               About
             </Link>
 
-            <Link to={'/projects'}>
+            <Link to={'/projects'} className="hover:underline">
               Projects 
             </Link>
           </div>
