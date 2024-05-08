@@ -29,14 +29,14 @@ return (
                         <input placeholder='Email'
                         className='md:w-[450px] w-full md:p-3 p-2 rounded-lg'
                         id='email'
-                        type='text'/>
+                        type='email'/>
                     </div>
                     <div>
                         <label className=''>Password</label>
                         <input placeholder='Password'
                         className='md:w-[450px] w-full md:p-3 p-2 rounded-lg'
                         id='password'
-                        type='text'/>
+                        type='password'/>
                     </div>
                     <div>
                         <button className='w-full p-3 text-white bg-indigo-500 rounded-lg transition-transform duration-300 ease-in-out hover:scale-105 hover:bg-indigo-600'>
