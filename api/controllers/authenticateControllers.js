@@ -7,24 +7,24 @@ export const signup = async (req, res, next) => {
     try {
         // Check if all fields are provided
         if (!username || !email || !password || username === '' || email === '' || password === '') {
-            return res.status(400).json({ message: 'All fields are required' });
+            throw{statusCode: 400, message: 'All fields are required'}
         }
 
         // Check password length
         if (password.length < 6) {
-            return res.status(400).json({ message: 'Password must be at least 6 characters' });
+            throw{statusCode: 400, message: 'Password must be atleast 6 characters '}
         }
 
         // Check if username already exists
         const existingUser = await User.findOne({ username });
         if (existingUser) {
-            return res.status(400).json({ message: 'Username already exists' });
+            throw {statusCode: 400, message: 'username exist already'};
         }
 
         // Check if email already exists
         const existingEmail = await User.findOne({ email });
         if (existingEmail) {
-            return res.status(400).json({ message: 'Email address is already registered' });
+            throw{statusCode: 400, message: 'Email is already registered'}
         }
 
         // Hash the password
