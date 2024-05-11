@@ -7,7 +7,11 @@ export default {
     flowbite.content(),
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        tiltneon: ["Tilt Neon"],
+      },
+    },
   },
   plugins: [
     flowbite.plugin(),

@@ -12,7 +12,7 @@ import Footer from './components/Footer'
 
 const App = () => {
 return (
-    <div>
+    <div className='font-tiltneon'>
         <NavBar/>
         <Routes>
             <Route path='/' element={<Home/>} />

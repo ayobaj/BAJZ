@@ -1,5 +1,6 @@
 import User from '../models/userModel.js';
 import bcryptjs from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
 export const signup = async (req, res, next) => {
     const { username, email, password } = req.body;
@@ -48,3 +49,38 @@ export const signup = async (req, res, next) => {
         next(error);
     }
 };
+
+
+export const signin = async (req, res, next) => {
+    const {email, password} = req.body;
+
+    try{
+        // CONDITIONS FOR CHEKING THE EMAIL AND PASSWORD
+        if(!email || !password || email === '' || password === ''){
+            throw{statusCode: 400, message: 'All fields are required'}
+        }
+
+        const validUser = await User.findOne({email})
+            if(!validUser){
+                throw{statusCode: 400, message:'user not found!'}
+            }
+
+        const validPassword = bcryptjs.compareSync(password, validUser.password);
+        if(!validPassword){
+            throw{statusCode: 400, message:'Invalid password'}
+        }
+
+        // USER AUTHENTICATION
+        const token = jwt.sign({id:validUser._id}, process.env.JWT_SECRET);
+
+        const {password: pass, ...rest} = validUser._doc;
+
+        res
+            .status(200)
+            .cookie('access_token', token, {httpOnly: true,}).json(rest);
+
+
+    } catch(error){
+        next(error)
+    }
+}
