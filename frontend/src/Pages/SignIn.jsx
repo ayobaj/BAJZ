@@ -4,14 +4,17 @@ import {Link, useNavigate} from 'react-router-dom';
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {Spinner} from 'flowbite-react';
+import { useDispatch, useSelector } from 'react-redux';
+import { signInStart, signInSuccess, signInFailure } from '../Redux/user/userSlice';
+
 
 const SignIn = () => {
 
 // TRACKING FORM CHANGES
     const [formData, setFormData] = useState({});
-    const [loading, setLoading] = useState(false);
-    const [errorMsg, setErrorMsg] = useState(null);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const {loading} = useSelector(state => state.user);
 
     const handleChange = (e) => {
         setFormData({...formData, [e.target.id ] : e.target.value})
@@ -24,9 +27,8 @@ const SignIn = () => {
         e.preventDefault();
 
         try {
-            setLoading(true);
-
-            setErrorMsg(null);
+            
+            dispatch(signInStart());
 
             const res = await fetch('/api/authenticate/signin', {
 
@@ -42,21 +44,19 @@ const SignIn = () => {
             console.log(data);
 
             if(res.ok){
-                setLoading(false)
+                dispatch(signInSuccess(data))
                 toast(data.message);
                 navigate('/');
 
             } else if(data.success === false){
-                setLoading(false);
-                setErrorMsg(data.message);
+                dispatch(signInFailure(data.message));
                 toast.error(data.message);
                 return
             }
 
 
         } catch (error) {
-            setLoading(false);
-            setErrorMsg(error.message);
+            dispatch(signInFailure(error.message));
             toast.error(error.message);
         }
     };
