@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import {Spinner} from 'flowbite-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { signInStart, signInSuccess, signInFailure } from '../Redux/user/userSlice';
+import OAuth from '../components/OAuth';
 
 
 const SignIn = () => {
@@ -106,7 +107,7 @@ return (
                             ) : 'SIGN IN'}
                         </button>
                     </div>
-
+                    <OAuth/>
                 </form>
                 <div className='text-sm mt-5'>
                     <span className='pr-2 '>Don't have an account?</span>

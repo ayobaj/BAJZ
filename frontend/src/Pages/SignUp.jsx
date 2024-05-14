@@ -4,6 +4,7 @@ import {Link, useNavigate} from 'react-router-dom';
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {Spinner} from 'flowbite-react';
+import OAuth from '../components/OAuth';
 
 const SignUp = () => {
 
@@ -114,6 +115,8 @@ return (
                             ) : 'Create Account'}
                         </button>
                     </div>
+
+                    <OAuth/>
 
                 </form>
                 <div className='text-sm mt-5'>
