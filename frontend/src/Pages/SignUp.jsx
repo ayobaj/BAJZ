@@ -63,7 +63,7 @@ const SignUp = () => {
     };
 
 return (
-    <div className='min-h-screen md:mt-20'>
+    <div className='min-h-screen md:mt-16'>
 
         <div className='flex flex-col p-3 max-w-4xl mx-auto md:flex-row md:items-center'>
             {/* left */}
