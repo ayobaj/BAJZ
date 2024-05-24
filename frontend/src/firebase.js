@@ -5,6 +5,8 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 
+
+
 const firebaseConfig = {
     apiKey: import.meta.env.VITE_FIREBASE,
     authDomain: "bajz-blog.firebaseapp.com",

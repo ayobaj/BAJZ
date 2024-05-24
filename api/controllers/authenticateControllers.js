@@ -88,41 +88,54 @@ export const signin = async (req, res, next) => {
 
 export const google = async (req, res, next) => {
 
-    const {email, name, googlePhotoUrl} = req.body;
+    const { email, name, googlePhotoUrl } = req.body;
 
-    try{
-        const user = await User.findOne({email})
+    if (!email || !name) {
+        return res.status(400).json({ message: "Email and name are required" });
+    }
+
+    try {
+        const user = await User.findOne({ email });
 
         if (user) {
-            const token = jwt.sign({id: user._id}, process.env.JWT_SECRET);
+            const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
 
-            const {password, ...rest} = user._doc;
+            const { password, ...rest } = user._doc;
 
-            res.status(200).cookie('access_token', token, {
-                httpOnly: true,
-            }).json(rest);
+            return res.status(200)
+                .cookie('access_token', token, {
+                    httpOnly: true,
+                })
+                .json(rest);
         } else {
-
             const generatedPassword = Math.random().toString(36).slice(-8) + Math.random().toString(36).slice(-8);
-
+            
             const hashedPassword = bcryptjs.hashSync(generatedPassword, 10);
 
+            const username = name.toLowerCase().split(' ').join('') + Math.random().toString(9).slice(-3);
+            
+            // Ensure all required fields are properly passed
             const newUser = new User({
-                username: name.toLowerCase().split('').join('') + Math.random().toString(9).slice(-3 ),
+                username,
                 email,
                 password: hashedPassword,
                 profilePicture: googlePhotoUrl,
-            })
+            });
+
+            await newUser.save();
+
+            const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET);
+
+            const { password, ...rest } = newUser._doc;
+
+            return res.status(200)
+                .cookie('access_token', token, { httpOnly: true })
+                .json(rest);
         }
-
-        await newUser.save();
-        const token = jwt.sign({id: newUser._id}, process.env.JWT_SECRET);
-
-        const {password, ...rest} = newUser._doc;
-
-        res.status(200).cookie('access_token', token, {httpOnly: true}).json(rest)
-
-    } catch(error){
-        next(error)
+    } catch (error) {
+        if (error.name === 'ValidationError') {
+            return res.status(400).json({ message: error.message });
+        }
+        next(error);
     }
-}
+};

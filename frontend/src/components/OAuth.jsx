@@ -23,12 +23,11 @@ const OAuth = () => {
         try{
 
             const resultsFromGoogle = await signInWithPopup(auth, provider)
-            
 
             const res = await fetch('/api/authenticate/google', {
                 method: 'POST',
 
-                headers: {'Content-Type': 'applicatiion/json'},
+                headers: {'Content-Type': 'application/json'},
 
                 body: JSON.stringify({
                     name: resultsFromGoogle.user.displayName,
@@ -45,7 +44,7 @@ const OAuth = () => {
             }
 
         } catch(error) {
-            console.log(error)
+            console.error('Google sign-in error:', error);
         }
 
     }
