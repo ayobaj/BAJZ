@@ -86,12 +86,12 @@ const NavBar = () => {
             inline
             label={
               <Avatar alt = 'user avatar'
-              img={currentUser.profilPicture} rounded/> 
+              img={currentUser.profilePicture} rounded/> 
             }>
 
               <Dropdown.Header>
                 <span className="block text-sm">@{currentUser.username}</span>
-                <span className="block text-sm font-medium truncate">@{currentUser.email}</span>
+                <span className="block text-sm font-medium truncate">{currentUser.email}</span>
               </Dropdown.Header>
 
               <Link to={'/dashboard?tab=profile'}>
@@ -102,7 +102,7 @@ const NavBar = () => {
 
               <Dropdown.Divider/>
 
-              <Dropdown.Item>Sign ut</Dropdown.Item>
+              <Dropdown.Item>Sign out</Dropdown.Item>
 
             </Dropdown>
           ) : (

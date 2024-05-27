@@ -119,7 +119,7 @@ export const google = async (req, res, next) => {
                 username,
                 email,
                 password: hashedPassword,
-                profilePicture: googlePhotoUrl,
+                profilePicture: req.body.googlePhotoUrl,
             });
 
             await newUser.save();

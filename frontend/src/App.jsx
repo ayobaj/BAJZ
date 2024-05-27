@@ -7,6 +7,7 @@ import Dashboard from './Pages/Dashboard'
 import Projects from './Pages/Projects'
 import NavBar from './components/NavBar'
 import Footer from './components/Footer'
+import PrivateRoute from './components/PrivateRoute'
 
 
 
@@ -19,8 +20,13 @@ return (
             <Route path='/about' element={<About/>} />
             <Route path='/sign-in' element={<SignIn/>} />
             <Route path='/sign-up' element={<SignUp/>} />
-            <Route path='/dashboard' element={<Dashboard/>} />
+
+            <Route element={<PrivateRoute/>}>
+                <Route path='/dashboard' element={<Dashboard/>} />
+            </Route>
+
             <Route path='/projects' element={<Projects/>} />
+            
         </Routes>
         <Footer/>
 
