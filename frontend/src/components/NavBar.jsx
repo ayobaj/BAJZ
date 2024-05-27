@@ -1,15 +1,19 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import image from "../assets/nav.png"
 import {AiOutlineSearch} from "react-icons/ai";
 import { RiMenu4Line } from "react-icons/ri";
 import { useState } from "react";
 import { IoCloseSharp } from "react-icons/io5";
+import {useSelector} from 'react-redux';
+import {Avatar, Dropdown} from 'flowbite-react'
 
 
 
 const NavBar = () => {
 
   const [show, setShow] = useState(false);
+
+  const {currentUser} = useSelector(state => state.user)
 
   const handleLinkClick = () => {
     setShow(false);
@@ -62,7 +66,7 @@ const NavBar = () => {
           </div>
         </div>
         
-        <div className="space-x-3 flex item-center">
+        <div className="space-x-3 flex item-center pr-3 ">
 
         
             <form className="flex items-center">
@@ -76,12 +80,39 @@ const NavBar = () => {
               </div>
             </form>
           
+          { currentUser ? (
+            <Dropdown 
+            arrowIcon={false}
+            inline
+            label={
+              <Avatar alt = 'user avatar'
+              img={currentUser.profilPicture} rounded/> 
+            }>
 
-          <Link to='/sign-in' className="">
+              <Dropdown.Header>
+                <span className="block text-sm">@{currentUser.username}</span>
+                <span className="block text-sm font-medium truncate">@{currentUser.email}</span>
+              </Dropdown.Header>
+
+              <Link to={'/dashboard?tab=profile'}>
+                <Dropdown.Item>
+                  Profile
+                </Dropdown.Item>
+              </Link>
+
+              <Dropdown.Divider/>
+
+              <Dropdown.Item>Sign ut</Dropdown.Item>
+
+            </Dropdown>
+          ) : (
+            <Link to='/sign-in' className="">
             <button className="btn">
               Sign in
             </button>
           </Link>
+          )}
+          
 
 
         </div>
