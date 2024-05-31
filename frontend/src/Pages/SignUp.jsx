@@ -17,7 +17,7 @@ const SignUp = () => {
     const handleChange = (e) => {
         setFormData({...formData, [e.target.id ] : e.target.value})
     };
-    console.log(formData); 
+    console.log(errorMsg);
 
 
     // FORM SUBMISSION TO THE DATABASE
@@ -40,7 +40,6 @@ const SignUp = () => {
 
             const data = await res.json();
 
-            console.log(data);
 
             if(res.ok){
                 setLoading(false)

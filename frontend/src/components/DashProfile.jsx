@@ -5,6 +5,10 @@ import {app} from '../firebase'
 import { Alert } from 'flowbite-react';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import { updateStart, updateSuccess, updateFailure } from '../Redux/user/userSlice';
+import { useDispatch } from 'react-redux';
+import {ToastContainer, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -20,7 +24,13 @@ const DashProfile = () => {
 
     const [imageFileUploadError, setImageFileUploadError] = useState(null);
 
+
     const filePicker = useRef();
+
+    const [formData, setFormData] = useState({});
+
+    const dispatch = useDispatch();
+
 
     const handleImageChange = (e) => {
 
@@ -79,9 +89,56 @@ const DashProfile = () => {
                 getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
                     setImageFileUrl(downloadURL);
                     setImageFileUploadProgress(null);
+                    setFormData({...formData, profilePicture: downloadURL})
                 })
             }
         )
+    };
+
+
+    const handleChange = (e) => {
+        setFormData({...formData, [e.target.id]: e.target.value})
+    }
+
+
+    const handleSubmit = async (e) => {
+
+        e.preventDefault();
+
+        const changesMade = Object.keys(formData).some((key) => formData[key]);
+
+        if(!changesMade){
+            toast.error('No changes made');
+            return;
+        }
+
+        try{
+
+            dispatch(updateStart());
+
+            const res = await fetch(`/api/user/update/${currentUser._id}`, {
+                
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+
+            });
+
+            const data = await res.json();
+
+            if(!res.ok){
+                dispatch(updateFailure(data.message));
+                toast.error(data.message);
+            }else{
+                dispatch(updateSuccess(data));
+                toast.success('Update successful!');
+            }
+
+        }catch(error){
+            dispatch(updateFailure(error.message))
+        }
     }
 
 
@@ -93,7 +150,7 @@ const DashProfile = () => {
                 PROFILE
             </h1>
 
-            <form className='flex flex-col gap-4'>
+            <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
 
                 <input hidden type='file' accept='image/*' onChange={handleImageChange} ref={filePicker}/>
                 
@@ -124,17 +181,19 @@ const DashProfile = () => {
                 <input type='text' id='username'
                 placeholder='username'
                 defaultValue={currentUser.username} 
-                className='focus:outline-none rounded-lg'/>
+                className='focus:outline-none rounded-lg'
+                onChange={handleChange}/>
 
                 <input type='email' id='email'
                 placeholder='email'
                 defaultValue={currentUser.email} 
-                className='focus:outline-none rounded-lg'/>
+                className='focus:outline-none rounded-lg'
+                onChange={handleChange}/>
 
                 <input type='password' id='password'
                 placeholder='password' 
                 className='focus:outline-none rounded-lg'
-                />
+                onChange={handleChange}/>
 
                 <button type='submit' className='update rounded-lg focus:outline-none'>
                     UPDATE
@@ -147,6 +206,9 @@ const DashProfile = () => {
                 <span className='cursor-pointer'>Delete</span>
                 <span className='cursor-pointer'>Sign Out</span>
             </div>
+
+
+            {<ToastContainer/>}
 
         </div>
     )
