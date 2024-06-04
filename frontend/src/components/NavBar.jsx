@@ -6,6 +6,10 @@ import { useState } from "react";
 import { IoCloseSharp } from "react-icons/io5";
 import {useSelector} from 'react-redux';
 import {Avatar, Dropdown} from 'flowbite-react'
+import { useDispatch } from "react-redux";
+import { signoutUserSuccess } from "../Redux/user/userSlice";
+import {ToastContainer, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -18,6 +22,35 @@ const NavBar = () => {
   const handleLinkClick = () => {
     setShow(false);
   }
+
+  const dispatch = useDispatch();
+
+
+  const handleSignOut = async () => {
+
+    try{
+
+        const res = await fetch('/api/user/signout', {
+            method: 'POST'
+        })
+
+        const data = await res.json();
+
+        if(!res.ok){
+            const errMsg = data.message || 'Signout failed. Please try again later';
+            toast.error(errMsg);
+            console.error(errMsg);
+        } else{
+            dispatch(signoutUserSuccess());
+            toast.success('Signed out successfully');
+        }
+
+    } catch(error){
+        const errMsg = error.message || 'Signout failed. Please try again later';
+        toast.error(errMsg);
+        console.error(errMsg);
+    }
+};
 
   return (
     <div className="">
@@ -102,7 +135,7 @@ const NavBar = () => {
 
               <Dropdown.Divider/>
 
-              <Dropdown.Item>Sign out</Dropdown.Item>
+              <Dropdown.Item onClick={handleSignOut}>Sign out</Dropdown.Item>
 
             </Dropdown>
           ) : (
@@ -118,6 +151,8 @@ const NavBar = () => {
         </div>
         
       </nav>
+
+      <ToastContainer/>
     </div>
   )
 }

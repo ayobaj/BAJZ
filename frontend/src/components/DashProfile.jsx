@@ -5,7 +5,7 @@ import {app} from '../firebase'
 import { Alert, Modal, Button } from 'flowbite-react';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
-import { updateStart, updateSuccess, updateFailure, deleteUserStart, deleteUserSuccess, deleteUserFailure } from '../Redux/user/userSlice';
+import { updateStart, updateSuccess, updateFailure, deleteUserStart, deleteUserSuccess, deleteUserFailure, signoutUserSuccess } from '../Redux/user/userSlice';
 import { useDispatch } from 'react-redux';
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -178,6 +178,36 @@ const DashProfile = () => {
     }
 
 
+    // SIGN OUT USER FUNCTIONALITY
+
+    const handleSignOut = async () => {
+
+        try{
+
+            const res = await fetch('/api/user/signout', {
+                method: 'POST'
+            })
+
+            const data = await res.json();
+
+            if(!res.ok){
+                const errMsg = data.message || 'Signout failed. Please try again later';
+                toast.error(errMsg);
+                console.error(errMsg);
+            } else{
+                dispatch(signoutUserSuccess());
+                toast.success('Signed out successfully');
+            }
+
+        } catch(error){
+            const errMsg = error.message || 'Signout failed. Please try again later';
+            toast.error(errMsg);
+            console.error(errMsg);
+        }
+    };
+
+
+
     return (
         <div className='max-w-sm mx-auto p-3 w-full'>
 
@@ -239,7 +269,7 @@ const DashProfile = () => {
 
             <div className='text-red-500 flex justify-between mt-5'>
                 <span onClick={()=> setShowModal(true) } className='cursor-pointer'>Delete</span>
-                <span className='cursor-pointer'>Sign Out</span>
+                <span onClick={handleSignOut} className='cursor-pointer'>Sign Out</span>
             </div>
 
 
