@@ -10,7 +10,7 @@ import { useDispatch } from 'react-redux';
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {HiOutlineExclamationCircle} from 'react-icons/hi';
-
+import {Link} from 'react-router-dom';
 
 
 
@@ -263,6 +263,14 @@ const DashProfile = () => {
                 <button type='submit' className='update rounded-lg focus:outline-none'>
                     UPDATE
                 </button>
+
+                {
+                    currentUser.isAdmin && (<Link to={'/create-post'}>
+                    <button type='button' className='update rounded-lg focus:outline-none w-full'>
+                        CREATE A POST
+                    </button>
+                    </Link>)
+                }
 
 
             </form>

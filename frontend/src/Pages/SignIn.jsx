@@ -42,8 +42,6 @@ const SignIn = () => {
 
             const data = await res.json();
 
-            console.log(data);
-
             if(res.ok){
                 dispatch(signInSuccess(data))
                 toast(data.message);
