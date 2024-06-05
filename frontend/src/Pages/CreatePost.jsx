@@ -26,9 +26,10 @@ const CreatePost = () => {
 
                 </div>
 
-                <div className="flex gap-4 items-center justify-between border-4 border-indigo-400 border-solid p-3">
+                <div className="flex gap-4 items-center justify-between border-4 rounded-lg border-indigo-400 border-solid p-3">
 
                     <FileInput type='file' accept='image/*'/>
+
                     <Button type='button' gradientDuoTone='purpleToBlue' size='sm' outline>Upload Image</Button>
 
                 </div>
