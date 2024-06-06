@@ -36,7 +36,7 @@ const CreatePost = () => {
 
                 <ReactQuill required  theme='snow' placeholder='Write Something....' className='h-72 mb-12 '/>
 
-                <Button type='submit' gradientDuoTone='purpleToBlue' className='my-6'>PUBLISH</Button>
+                <Button type='submit' gradientDuoTone='purpleToBlue' className='my-4'>PUBLISH</Button>
 
             </form>
 
