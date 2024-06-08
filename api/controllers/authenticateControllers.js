@@ -25,7 +25,7 @@ export const signup = async (req, res, next) => {
         // Check if email already exists
         const existingEmail = await User.findOne({ email });
         if (existingEmail) {
-            throw{statusCode: 400, message: 'Email is already registered'}
+            throw{statusCode: 400, message: 'Email exist already'}
         }
 
         // Hash the password
