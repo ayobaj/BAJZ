@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import DashSidebar from '../components/DashSidebar';
 import DashProfile from '../components/DashProfile';
 import DashPosts from '../components/DashPosts';
+import DashUsers from '../components/DashUsers';
 
 
 
@@ -34,6 +35,9 @@ const Dashboard = () => {
 
             {/* posts */}
             {tab === 'posts' && <DashPosts/>}
+
+            {/* users */}
+            {tab === 'users' && <DashUsers/>}
 
     </div>
     )
