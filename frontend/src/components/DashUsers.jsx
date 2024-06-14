@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from 'react-redux';
 import { Table, TableHead, TableBody, TableCell, TableRow, Modal, Button } from 'flowbite-react';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
-import { ToastContainer} from 'react-toastify';
+import { ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {FaCheck, FaTimes} from 'react-icons/fa';
 
@@ -71,7 +71,29 @@ const DashUsers = () => {
 
 const handleDeleteUser = async () => {
 
+    try{
+
+        const res = await fetch(`/api/user/delete/${userIdToDelete}`, {
+            method: 'DELETE'
+        });
+
+        const data = await res.json();
+
+        if(res.ok){
+            setUsers((prev) => prev.filter((user) => user._id !== userIdToDelete));
+            setShowModal(false);
+        }else{
+            toast.error(data.message);
+        }
+
+    }catch(error){
+        console.error(error)
+    }
+
+
 }
+
+
 
 
     return (
