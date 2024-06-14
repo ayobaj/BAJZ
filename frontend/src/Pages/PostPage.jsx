@@ -1,6 +1,7 @@
 import { Spinner } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
+import CommentSection from "../components/CommentSection";
 
 
 const PostPage = () => {
@@ -82,6 +83,8 @@ const PostPage = () => {
             <div className="post-content p-3 max-w-2xl mx-auto w-full" dangerouslySetInnerHTML={{__html: post && post.content}}>
 
             </div>
+
+            <CommentSection postId={post._id}/>
 
         </main>
     )

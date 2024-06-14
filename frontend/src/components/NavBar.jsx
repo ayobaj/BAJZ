@@ -61,7 +61,7 @@ const NavBar = () => {
           {show === false ? <RiMenu4Line onClick={()=>setShow(true)} className="cursor-pointer text-3xl md:hidden text-indigo-400 "/> :
           <IoCloseSharp onClick={()=>setShow(false)} className="cursor-pointer text-3xl md:hidden text-indigo-400"/>}
 
-          {show && <div className="md:hidden text-white font-semibold text-xl md:static md:min-h-fit absolute md:w-auto bg-indigo-400 z-10 md:bg-white min-h-[50vh] left-0 top-[9.7%] w-full flex items-center justify-center">
+          {show && <div className="md:hidden text-white font-semibold text-xl md:static md:min-h-fit absolute md:w-auto bg-indigo-400 z-20 md:bg-white min-h-[50vh] left-0 top-[9.7%] w-full flex items-center justify-center">
           <div className="flex items-center md:gap-[50px] md:flex-row flex-col gap-10">
             <Link to={'/'} onClick={handleLinkClick} className="hover:underline">
               Home
@@ -115,6 +115,7 @@ const NavBar = () => {
           
           { currentUser ? (
             <Dropdown 
+            className="z-20"
             arrowIcon={false}
             inline
             label={

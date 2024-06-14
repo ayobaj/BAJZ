@@ -53,3 +53,7 @@ body{
 .dark .post-content a{
     color: red;
 }
+
+.focus-none{
+outline: none !important
+}
