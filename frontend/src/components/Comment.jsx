@@ -1,12 +1,17 @@
 import { useEffect, useState } from "react"
 import PropTypes from "prop-types";
-import moment from 'moment'
+import moment from 'moment';
+import { useSelector } from "react-redux";
+import { FaHeart } from "react-icons/fa";
 
 
 
-const Comment = ({comment}) => {
+
+const Comment = ({comment, onLike}) => {
 
     const [user, setUser] = useState({});
+
+    const {currentUser} = useSelector((state) => state.user)
 
 
     useEffect(()=> {
@@ -49,6 +54,20 @@ const Comment = ({comment}) => {
                 </div>
 
                 <p className="text-gray-500 pb-2">{comment.content}</p>
+
+                <div className="flex gap-2 items-center pt-2  max-w-fit ">
+                    <button type="button" onClick={()=> onLike(comment._id)} >
+                        <FaHeart className= {`text-sm  text-gray-500 hover:text-indigo-400 ${currentUser && comment.likes.includes(currentUser._id) && 'text-indigo-400'}`}/>
+                    </button>
+
+                    <p className="text-gray-500 text-xs">
+
+                        {
+                            comment.numberOfLikes > 0 && comment.numberOfLikes + ' ' + (comment.numberOfLikes === 1 ? 'like' : 'likes')
+                        }
+
+                    </p>
+                </div>
             </div>
 
         </div>
@@ -64,6 +83,9 @@ Comment.propTypes = {
         userId: PropTypes.string.isRequired,
         createdAt: PropTypes.string.isRequired,
         content: PropTypes.string.isRequired,
+        _id: PropTypes.string.isRequired,
+        numberOfLikes: PropTypes.number.isRequired,
+        
     }).isRequired
 };
 

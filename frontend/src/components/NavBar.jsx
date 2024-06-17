@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import image from "../assets/nav.png"
 import {AiOutlineSearch} from "react-icons/ai";
 import { RiMenu4Line } from "react-icons/ri";
@@ -18,6 +18,8 @@ const NavBar = () => {
   const [show, setShow] = useState(false);
 
   const {currentUser} = useSelector(state => state.user)
+
+  const {navigate} = useNavigate();
 
   const handleLinkClick = () => {
     setShow(false);
@@ -42,7 +44,9 @@ const NavBar = () => {
             console.error(errMsg);
         } else{
             dispatch(signoutUserSuccess());
+            navigate('/sign-in');
             toast.success('Signed out successfully');
+            
         }
 
     } catch(error){
