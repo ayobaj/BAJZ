@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import PropTypes from 'prop-types';
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import {Alert} from 'flowbite-react';
 import Comment from "./Comment";
@@ -109,7 +109,16 @@ const CommentSection = ({postId}) => {
             }
         }
         getComments();
-    }, [postId])
+    }, [postId]);
+
+
+
+    const handleEdit = async (comment, editedContent ) => {
+
+        setComments(
+            comments.map((c) => c._id === comment._id ? {...c, content: editedContent} : c)
+        )
+    }
 
     return (
         <div className="max-w-2xl mx-auto w-full p-3">
@@ -164,7 +173,7 @@ const CommentSection = ({postId}) => {
 
                         {
                         comments.map((comment) => (<Comment key={comment._id} 
-                            comment = {comment} onLike={handleLike}/>)) 
+                            comment = {comment} onLike={handleLike} onEdit={handleEdit}/>)) 
                         }
                     
                     </>)

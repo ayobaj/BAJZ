@@ -7,11 +7,23 @@ import { FaHeart } from "react-icons/fa";
 
 
 
-const Comment = ({comment, onLike}) => {
+const Comment = ({comment, onLike, onEdit}) => {
 
     const [user, setUser] = useState({});
 
+    const [isEditing, setIsEditing] = useState(false);
+
     const {currentUser} = useSelector((state) => state.user)
+
+    const [editedContent, setEditedContent] = useState(comment.content)
+
+    const handleEdit = () => {
+
+        setIsEditing(true);
+
+        setEditedContent(comment.content);
+
+    } 
 
 
     useEffect(()=> {
@@ -36,6 +48,33 @@ const Comment = ({comment, onLike}) => {
 
     }, [comment])
 
+    const handleSave = async () => {
+
+        try{
+
+            const res = await fetch(`/api/comment/editComment/${comment._id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+
+                body: JSON.stringify({
+                    content: editedContent
+                })
+            });
+
+            const data = res.json();
+
+            if(res.ok){
+                setIsEditing(false);
+                onEdit(comment, editedContent);
+            }
+
+        }catch(error){
+            console.log(error)
+        }
+    }
+
 
     return (
         <div className="flex p-4 border-b dark:border-gray-600">
@@ -53,21 +92,68 @@ const Comment = ({comment, onLike}) => {
                     <span className="text-xs text-gray-500">{moment(comment.createdAt).fromNow()}</span>
                 </div>
 
-                <p className="text-gray-500 pb-2">{comment.content}</p>
+                {isEditing ?
+                
+                    (<>
+                
+                    <textarea 
+                    
+                        className="mb-2 rounded-lg w-full"
+                        value={editedContent}
+                        onChange={(e) => setEditedContent(e.target.value)}
 
-                <div className="flex gap-2 items-center pt-2  max-w-fit ">
-                    <button type="button" onClick={()=> onLike(comment._id)} >
-                        <FaHeart className= {`text-sm  text-gray-500 hover:text-indigo-400 ${currentUser && comment.likes.includes(currentUser._id) && 'text-indigo-400'}`}/>
-                    </button>
+                    />
 
-                    <p className="text-gray-500 text-xs">
+                    <div className="flex justify-end gap-2">
 
-                        {
-                            comment.numberOfLikes > 0 && comment.numberOfLikes + ' ' + (comment.numberOfLikes === 1 ? 'like' : 'likes')
-                        }
+                        <button type="button" className="p-2 text-gray-500 hover:bg-indigo-400 border-2 text-sm rounded-lg hover:text-white"
+                            onClick={handleSave} >
+                            Save
+                        </button>
 
-                    </p>
-                </div>
+                        <button type="button" className="p-3 text-white  hover:bg-indigo-500 hover:text-white text-sm bg-indigo-400 rounded-lg "
+                            onClick={() => setIsEditing(false)}>
+                            Cancel
+                        </button>
+
+                    </div>
+                
+                    </>) : 
+                
+                        (<>
+                    
+                            <p className="text-gray-500 pb-2">{comment.content}</p>
+
+                            <div className="flex gap-2 items-center pt-2  max-w-fit ">
+                                <button type="button" onClick={()=> onLike(comment._id)} >
+                                    <FaHeart className= {`text-sm  text-gray-500 hover:text-indigo-400 ${currentUser && comment.likes.includes(currentUser._id) && 'text-indigo-400'}`}/>
+                                </button>
+
+                                <p className="text-gray-500 text-xs">
+
+                                    {
+                                        comment.numberOfLikes > 0 && comment.numberOfLikes + ' ' + (comment.numberOfLikes === 1 ? 'like' : 'likes')
+                                    }
+
+                                </p>
+
+                                {
+                                    currentUser && (currentUser._id === comment.userId ||
+                                    currentUser.isAdmin) &&
+                                    
+                                    (
+                                        <button onClick={handleEdit} className="text-gray-400 text-xs hover:text-red-500" type="button">
+                                            Edit
+                                        </button>
+                                    )
+
+                                }
+
+                            </div>
+
+                        </>)}
+
+
             </div>
 
         </div>
