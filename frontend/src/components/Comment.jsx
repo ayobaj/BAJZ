@@ -7,7 +7,7 @@ import { FaHeart } from "react-icons/fa";
 
 
 
-const Comment = ({comment, onLike, onEdit}) => {
+const Comment = ({comment, onLike, onEdit, onDelete}) => {
 
     const [user, setUser] = useState({});
 
@@ -142,9 +142,15 @@ const Comment = ({comment, onLike, onEdit}) => {
                                     currentUser.isAdmin) &&
                                     
                                     (
-                                        <button onClick={handleEdit} className="text-gray-400 text-xs hover:text-red-500" type="button">
-                                            Edit
-                                        </button>
+                                        <>
+                                            <button onClick={handleEdit} className="text-gray-400 text-xs hover:text-blue-500" type="button">
+                                                Edit
+                                            </button>
+
+                                            <button onClick={ ()=> onDelete(comment._id)} className="text-gray-400 text-xs hover:text-red-500" type="button">
+                                            Delete
+                                            </button>
+                                        </>
                                     )
 
                                 }
