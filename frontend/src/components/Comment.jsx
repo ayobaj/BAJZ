@@ -175,7 +175,7 @@ Comment.propTypes = {
         userId: PropTypes.string.isRequired,
         createdAt: PropTypes.string.isRequired,
         content: PropTypes.string.isRequired,
-        _id: PropTypes.string.isRequired,
+        // _id: PropTypes.string.isRequired,
         numberOfLikes: PropTypes.number.isRequired,
         
     }).isRequired

@@ -107,7 +107,7 @@ export const deleteComment = async (req, res, next) => {
 
     try{
 
-        const comment = await findById(req.params.commentId);
+        const comment = await Comment.findById(req.params.commentId);
 
         if(!comment) {
             return next(errorHandler(404, 'Comment not found'))

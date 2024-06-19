@@ -128,12 +128,28 @@ const CommentSection = ({postId}) => {
 
 
     const handleDelete = async (commentId) => {
+        
+        setShowModal(false);
+
         try{
 
-            if()
+            if(!currentUser){
+                navigate('/sign-in');
+                return;
+            }
+
+            const res = await fetch(`/api/comment/deleteComment/${commentId}`, 
+                {
+                    method: 'DELETE',
+                });
+
+                if(res.ok){
+                    const data = await res.json();
+                    setComments(comments.filter((comment) => comment._id !== commentId));
+                }
 
         }catch(error){
-            console.error(error.message);
+            console.log(error.message)
         }
     }
 
@@ -215,7 +231,7 @@ const CommentSection = ({postId}) => {
                         <HiOutlineExclamationCircle className="h-12 w-14 text-slate-400 dark:text-gray-200 mt-4 mx-auto" />
                         <h3 className="mb-5 text-lg text-slate-500 dark:text-gray-400">Are you sure you want to delete this comment?</h3>
                         <div className="flex justify-center gap-4">
-                            <Button color="failure" onClick={handleDelete}>
+                            <Button color="failure" onClick={() => handleDelete(commentToDelete)}>
                                 Yes, I'm Sure
                             </Button>
                             <Button onClick={() => setShowModal(false)} color="gray">
