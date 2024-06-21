@@ -22,7 +22,13 @@ const DashComment = () => {
         const fetchComments = async () => {
 
             try {
-                const res = await fetch(`/api/comment/getcomments`);
+                const res = await fetch(`/api/comment/getcomments`, {
+                    headers: {
+                        'Authorization': `Bearer ${currentUser.token}` // Make sure the token is sent
+                    }
+                });
+
+            
 
                 const data = await res.json();
 
@@ -37,7 +43,7 @@ const DashComment = () => {
             }
         };
 
-        if (currentUser.isAdmin) {
+        if (currentUser && currentUser.isAdmin) {
             fetchComments();
         }
 
@@ -71,9 +77,11 @@ const DashComment = () => {
 
 const handleDeleteComment = async () => {
 
+    setShowModal(false);
+
     try{
 
-        const res = await fetch(`/api/comment/delete/${commentIdToDelete}`, {
+        const res = await fetch(`/api/comment/deleteComment/${commentIdToDelete}`, {
             method: 'DELETE'
         });
 
@@ -95,88 +103,90 @@ const handleDeleteComment = async () => {
 
 
 
-    return (
-        <div className="table-auto overflow-x-scroll md:mx-auto p-3 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700">
-            {currentUser && currentUser.isAdmin && comments.length > 0 ? (
-                <>
-                    <Table hoverable className="shadow-md">
+return (
+    <div className="table-auto overflow-x-scroll md:mx-auto p-3 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700">
+        {currentUser && currentUser.isAdmin && comments.length > 0 ? (
+            <>
+                <Table hoverable className="shadow-md">
 
-                        <TableHead>
-                            <Table.HeadCell> Date Updated </Table.HeadCell>
-                            <Table.HeadCell> Comment Content </Table.HeadCell>
-                            <Table.HeadCell> Number of lkes </Table.HeadCell>
-                            <Table.HeadCell> Post Id </Table.HeadCell>
-                            <Table.HeadCell> username </Table.HeadCell>
-                            <Table.HeadCell> Delete </Table.HeadCell>
-                        </TableHead>
+                    <TableHead>
+                        <Table.HeadCell> Date Updated </Table.HeadCell>
+                        <Table.HeadCell> Comment Content </Table.HeadCell>
+                        <Table.HeadCell> Number of lkes </Table.HeadCell>
+                        <Table.HeadCell> Post Id </Table.HeadCell>
+                        <Table.HeadCell> username </Table.HeadCell>
+                        <Table.HeadCell> Delete </Table.HeadCell>
+                    </TableHead>
 
-                        <TableBody>
+                    <TableBody>
 
-                            {comments.map((comment) => (
+                        {comments.map((comment) => (
 
-                                <TableRow key={comment._id} className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                            <TableRow key={comment._id} className="bg-white dark:border-gray-700 dark:bg-gray-800">
 
-                                    <TableCell>{new Date(comment.UpdatedAt).toLocaleDateString()}</TableCell>
+                                <TableCell>{new Date(comment.updatedAt).toLocaleDateString()}</TableCell>
 
-                                    <TableCell> {comment.content} </TableCell>
+                                <TableCell> {comment.content} </TableCell>
 
-                                    <TableCell className="dark:text-white"> {comment.numberOfLikes} </TableCell>
+                                <TableCell className="dark:text-white"> {comment.numberOfLikes} </TableCell>
 
-                                    <TableCell className="dark:text-white"> {comment.username} </TableCell>
+                                <TableCell className="dark:text-white"> {comment.postId} </TableCell>
 
-                                    <TableCell>
-                                        <span
-                                            onClick={() => {
-                                                setShowModal(true);
-                                                setCommentIdToDelete(comment._id);
-                                            }}
-                                            className="font-medium text-red-500 hover:underline cursor-pointer"
-                                        >
-                                            Delete
-                                        </span>
-                                    </TableCell>
+                                <TableCell className="dark:text-white"> {comment.username} </TableCell>
 
-                                </TableRow>
-                            ))}
+                                <TableCell>
+                                    <span
+                                        onClick={() => {
+                                            setShowModal(true);
+                                            setCommentIdToDelete(comment._id);
+                                        }}
+                                        className="font-medium text-red-500 hover:underline cursor-pointer"
+                                    >
+                                        Delete
+                                    </span>
+                                </TableCell>
 
-                        </TableBody>
+                            </TableRow>
+                        ))}
 
-                    </Table>
+                    </TableBody>
 
-                    {
-                        showMore && (<button onClick={handleShowMore}  className="w-full text-teal-500 self-center text-sm py-7 ">Show more</button>)
-                    }
+                </Table>
 
-                </>
-            ) : (
-                <p>You have no comments yet</p>
-            )}
+                {
+                    showMore && (<button onClick={handleShowMore}  className="w-full text-teal-500 self-center text-sm py-7 ">Show more</button>)
+                }
 
-            <Modal show={showModal} onClose={() => setShowModal(false)} popup size="md">
+            </>
+        ) : (
+            <p>You have no comments yet</p>
+        )}
 
-                <Modal.Header />
+        <Modal show={showModal} onClose={() => setShowModal(false)} popup size="md">
 
-                <Modal.Body>
-                    <div className="text-center">
-                        <HiOutlineExclamationCircle className="h-12 w-14 text-slate-400 dark:text-gray-200 mt-4 mx-auto" />
-                        <h3 className="mb-5 text-lg text-slate-500 dark:text-gray-400">Are you sure you want to delete this comment?</h3>
-                        <div className="flex justify-center gap-4">
-                            <Button color="failure" onClick={handleDeleteComment}>
-                                Yes, I'm Sure
-                            </Button>
-                            <Button onClick={() => setShowModal(false)} color="gray">
-                                No, Cancel
-                            </Button>
-                        </div>
+            <Modal.Header />
+
+            <Modal.Body>
+                <div className="text-center">
+                    <HiOutlineExclamationCircle className="h-12 w-14 text-slate-400 dark:text-gray-200 mt-4 mx-auto" />
+                    <h3 className="mb-5 text-lg text-slate-500 dark:text-gray-400">Are you sure you want to delete this comment?</h3>
+                    <div className="flex justify-center gap-4">
+                        <Button color="failure" onClick={handleDeleteComment}>
+                            Yes, I'm Sure
+                        </Button>
+                        <Button onClick={() => setShowModal(false)} color="gray">
+                            No, Cancel
+                        </Button>
                     </div>
-                </Modal.Body>
+                </div>
+            </Modal.Body>
 
-            </Modal>
+        </Modal>
 
-            <ToastContainer />
+        <ToastContainer />
 
-        </div>
-    );
+    </div>
+);
 };
 
 export default DashComment;
