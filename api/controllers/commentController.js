@@ -124,3 +124,9 @@ export const deleteComment = async (req, res, next) => {
         next(error);
     }
 }
+
+
+export const getComment = async (req, res, next) => {
+    
+}
+
