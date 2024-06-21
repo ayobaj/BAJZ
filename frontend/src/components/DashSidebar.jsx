@@ -1,5 +1,5 @@
 import {Sidebar} from 'flowbite-react';
-import {HiAnnotation, HiArrowSmRight, HiDocumentText, HiOutlineUserGroup, HiUser} from 'react-icons/hi';
+import {HiAnnotation, HiArrowSmRight, HiChartPie, HiDocumentText, HiOutlineUserGroup, HiUser} from 'react-icons/hi';
 import { useLocation, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import {ToastContainer, toast} from 'react-toastify';
@@ -72,6 +72,17 @@ const DashSidebar = () => {
                         labelColor='dark' >
                         Profile
                     </Sidebar.Item>
+
+                    {currentUser.isAdmin && (
+
+                    <Sidebar.Item as={Link}
+                    to={'/dashboard?tab=overview'}
+                    active={tab === 'overview' || !tab}
+                    icon={HiChartPie}>
+                        Dashboard
+                    </Sidebar.Item>
+
+                    )}
 
                     {currentUser.isAdmin && (
 
