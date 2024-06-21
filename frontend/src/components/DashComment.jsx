@@ -114,7 +114,6 @@ return (
                         <Table.HeadCell> Comment Content </Table.HeadCell>
                         <Table.HeadCell> Number of lkes </Table.HeadCell>
                         <Table.HeadCell> Post Id </Table.HeadCell>
-                        <Table.HeadCell> username </Table.HeadCell>
                         <Table.HeadCell> Delete </Table.HeadCell>
                     </TableHead>
 
@@ -131,8 +130,6 @@ return (
                                 <TableCell className="dark:text-white"> {comment.numberOfLikes} </TableCell>
 
                                 <TableCell className="dark:text-white"> {comment.postId} </TableCell>
-
-                                <TableCell className="dark:text-white"> {comment.username} </TableCell>
 
                                 <TableCell>
                                     <span
