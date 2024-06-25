@@ -12,6 +12,8 @@ import OnlyAdminPrivateRoute from './components/OnlyAdminPrivateRoute'
 import CreatePost from './Pages/CreatePost'
 import UpdatePost from './Pages/UpdatePost'
 import PostPage from './Pages/PostPage'
+import Search from './Pages/Search'
+
 
 
 
@@ -24,6 +26,7 @@ return (
             <Route path='/about' element={<About/>} />
             <Route path='/sign-in' element={<SignIn/>} />
             <Route path='/sign-up' element={<SignUp/>} />
+            <Route path='/search' element={<Search/>}/>
 
             <Route element={<PrivateRoute/>}>
                 <Route path='/dashboard' element={<Dashboard/>} />

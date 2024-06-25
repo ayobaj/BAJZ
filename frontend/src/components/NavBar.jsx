@@ -1,8 +1,8 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import image from "../assets/nav.png"
 import {AiOutlineSearch} from "react-icons/ai";
 import { RiMenu4Line } from "react-icons/ri";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IoCloseSharp } from "react-icons/io5";
 import {useSelector} from 'react-redux';
 import {Avatar, Dropdown} from 'flowbite-react'
@@ -13,13 +13,21 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 
+
+
+
 const NavBar = () => {
 
   const [show, setShow] = useState(false);
 
+  const [searchTerm, setSearchTerm] = useState('');
+
   const {currentUser} = useSelector(state => state.user)
 
-  const {navigate} = useNavigate();
+  const navigate = useNavigate();
+
+  const location = useLocation();
+
 
   const handleLinkClick = () => {
     setShow(false);
@@ -56,16 +64,47 @@ const NavBar = () => {
     }
 };
 
+  // SEARCH BAR 
+  
+  useEffect(()=> {
+
+    const urlParams = new URLSearchParams(location.search);
+
+    const searchTermFromUrl = urlParams.get('searchTerm');
+
+    if(searchTermFromUrl){
+      setSearchTerm(searchTermFromUrl); 
+    }
+
+  }, [location.search]);
+
+
+  const handleSubmit = (e) => {
+
+    e.preventDefault();
+
+    const urlParams = new URLSearchParams(location.search);
+
+    urlParams.set('searchTerm', searchTerm);
+
+    const searchQuery = urlParams.toString();
+    
+    navigate(`/search?${searchQuery}`)
+  }
+
+
+
+
   return (
     <div className="">
-      <nav className=" shadow-md flex items-center justify-between md:mx-auto p-3">
+      <nav className="flex items-center justify-between md:mx-auto p-3">
 
         <div className="flex items-center">
 
           {show === false ? <RiMenu4Line onClick={()=>setShow(true)} className="cursor-pointer text-3xl md:hidden text-indigo-400 "/> :
           <IoCloseSharp onClick={()=>setShow(false)} className="cursor-pointer text-3xl md:hidden text-indigo-400"/>}
 
-          {show && <div className="md:hidden text-white font-semibold text-xl md:static md:min-h-fit absolute md:w-auto bg-indigo-400 z-20 md:bg-white min-h-[50vh] left-0 top-[9.7%] w-full flex items-center justify-center">
+          {show && <div className="md:hidden text-white font-semibold text-xl md:static md:min-h-fit absolute md:w-auto bg-indigo-400 z-20 md:bg-white min-h-[50vh] left-0 top-[9.7%]  w-full flex items-center justify-center">
           <div className="flex items-center md:gap-[50px] md:flex-row flex-col gap-10">
             <Link to={'/'} onClick={handleLinkClick} className="hover:underline">
               Home
@@ -106,14 +145,19 @@ const NavBar = () => {
         <div className="space-x-3 flex item-center pr-3 ">
 
         
-            <form className="flex items-center">
-              <button className="w-12 flex items-center text-indigo-500 text-2xl md:hidden">
+            <form onSubmit={handleSubmit} className="flex items-center">
+              <button type="button" className="w-12 flex items-center text-indigo-500 text-2xl md:hidden">
                 <AiOutlineSearch/>
               </button>
 
               <div className="hidden md:flex relative">
-                <input className="border-2 p-2 pl-7 focus:outline-none border-indigo-400" placeholder="Search..."/>
+
+                <input onChange={(e) => setSearchTerm(e.target.value)}
+                value={searchTerm}  
+                className="border-2 p-2 pl-7 focus:outline-none shadow-md" placeholder="Search..."/>
+
                 <AiOutlineSearch className="absolute text-xl text-indigo-400 top-3.5 left-1 "/>
+
               </div>
             </form>
           
