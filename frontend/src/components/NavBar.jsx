@@ -58,7 +58,7 @@ const NavBar = () => {
 
   return (
     <div className="">
-      <nav className=" flex items-center justify-between md:mx-auto p-3">
+      <nav className=" shadow-md flex items-center justify-between md:mx-auto p-3">
 
         <div className="flex items-center">
 

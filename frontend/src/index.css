@@ -75,3 +75,20 @@ body{
 .focus-none{
 outline: none !important
 }
+
+
+
+@keyframes text-reveal {
+0% {
+    opacity: 0;
+    transform: translateY(20px);
+}
+100% {
+    opacity: 1;
+    transform: translateY(0);
+}
+}
+
+.text-reveal {
+animation: text-reveal 1s ease-out forwards;
+}
