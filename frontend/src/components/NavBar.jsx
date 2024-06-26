@@ -155,8 +155,8 @@ const NavBar = () => {
               <div className=" md:flex relative">
 
                 <input onChange={(e) => setSearchTerm(e.target.value)}
-                value={searchTerm}  
-                className="border-2 p-2 pl-7 focus:outline-none shadow-md" placeholder="Search..."/>
+                value={searchTerm} 
+                className="border-2 p-2 pl-7 w-[90px] focus:outline-none shadow-md" placeholder="Search..."/>
 
                 <AiOutlineSearch className="absolute text-xl text-indigo-400 top-3.5 left-1 "/>
 
