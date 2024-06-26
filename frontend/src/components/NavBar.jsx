@@ -151,11 +151,8 @@ const NavBar = () => {
         
         
             <form onSubmit={handleSubmit} className="flex items-center">
-              <button type="button" className="w-12 flex items-center text-indigo-500 text-2xl md:hidden">
-                <AiOutlineSearch/>
-              </button>
 
-              <div className="hidden md:flex relative">
+              <div className=" md:flex relative">
 
                 <input onChange={(e) => setSearchTerm(e.target.value)}
                 value={searchTerm}  

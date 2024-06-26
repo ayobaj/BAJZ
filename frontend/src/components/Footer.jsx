@@ -6,7 +6,7 @@ import { FaRegCopyright } from "react-icons/fa";
 
 const Footer = () => {
     return (
-        <div className=' bg-slate-300 p-3 space-y-6'>
+        <div className=' bg-slate-300 p-3 space-y-6 sm:pl-9'>
 
             <div className=' pt-5 flex relative items-center justify-center md:justify-start'>
                 <p className=' font-bold md:text-[40px] text-[30px] text-indigo-500'>The Creative<br/> Blog Agency</p>
