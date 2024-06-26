@@ -96,7 +96,7 @@ const NavBar = () => {
 
   return (
     <div className="">
-      <nav className="flex items-center justify-between md:mx-auto p-3">
+      <nav className="flex items-center shadow-md justify-between md:mx-auto p-3">
 
         <div className="flex items-center">
 
@@ -112,10 +112,6 @@ const NavBar = () => {
             <Link to={'/about'} onClick={handleLinkClick}className="hover:underline">
               About
             </Link>
-
-            <Link to={'/projects'} onClick={handleLinkClick}className="hover:underline">
-              Projects 
-            </Link>
           </div>
           </div> }
 
@@ -125,7 +121,7 @@ const NavBar = () => {
           </Link>
         </div>
 
-        <div className="md:static md:min-h-fit absolute md:w-auto bg-indigo-400 md:bg-white min-h-[60vh] left-0 top-[-100%] w-full flex items-center justify-center">
+        {/* <div className="md:static md:min-h-fit absolute md:w-auto bg-indigo-400 md:bg-white min-h-[60vh] left-0 top-[-100%] w-full flex items-center justify-center">
           <div className="flex items-center md:gap-[50px] md:flex-row flex-col gap-10 font-semibold text-lg text-indigo-400">
             <Link to={'/'} className="hover:underline ">
               Home
@@ -135,14 +131,24 @@ const NavBar = () => {
               About
             </Link>
 
-            <Link to={'/projects'} className="hover:underline">
-              Projects 
-            </Link>
           </div>
-        </div>
+        </div> */}
         
         <div className="space-x-3 flex item-center pr-3 ">
 
+        <div className="md:static md:min-h-fit absolute md:w-auto bg-indigo-400 md:bg-white min-h-[60vh] left-0 top-[-100%] w-full flex items-center justify-center md:mr-[30px]">
+          <div className="flex items-center md:gap-[50px] md:flex-row flex-col gap-10 font-semibold text-lg text-indigo-400">
+            <Link to={'/'} className="hover:underline ">
+              Home
+            </Link>
+
+            <Link to={'/about'} className="hover:underline">
+              About
+            </Link>
+
+          </div>
+        </div>
+        
         
             <form onSubmit={handleSubmit} className="flex items-center">
               <button type="button" className="w-12 flex items-center text-indigo-500 text-2xl md:hidden">
