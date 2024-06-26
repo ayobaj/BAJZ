@@ -97,7 +97,28 @@ const Search = () => {
 
     }
 
-    
+    const handleShowMore = async () => {
+        const numberofPosts = posts.length;
+        const startIndex = numberofPosts;
+        const urlParams = new URLSearchParams(location.search);
+        urlParams.set('startIndex', startIndex);
+        const searchQuery = urlParams.toString();
+        const res = await fetch(`/api/post/getposts?${searchQuery}`)
+
+        if(!res.ok){
+            return;
+        }
+
+        if(res.ok){
+            const data = await res.json();
+            setPosts([...posts, ...data.posts]);
+            if(data.posts.length === 9){
+                setShowMore(true);
+            } else {
+                setShowMore(false)
+            }
+        }
+    }
 
 
 return (
@@ -160,6 +181,12 @@ return (
                 {loading && <Skeleton/>}
 
                 {!loading && posts && posts.map((post)=> <PostCard key={post._id} post={post}/>)}
+
+                {
+                    showMore && <button onClick={handleShowMore} className="text-indigo-400 hover:underline p-7 w-full">
+                        Show More
+                    </button>
+                }
             </div>
         </div>
 
