@@ -27,7 +27,7 @@ const Home = () => {
 return (
     <div className=''>
 
-        <div className="flex flex-col gap-5 p-12  sm:p-28 max-w-6xl min-h-screen justify-between lg:min-h-screen">
+        <div className="flex flex-col gap-5 p-8  sm:p-28 max-w-6xl min-h-screen justify-between lg:min-h-screen">
 
             <div className='space-y-4 flex flex-col'>
                 <h1 className="text-7xl font-bold lg:text-7xl text-slate-600 text-reveal">BAJZ BLOG.</h1>
