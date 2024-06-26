@@ -99,7 +99,7 @@ const PostPage = () => {
                 <button className="btn rounded-lg flex">{post && post.category}</button>
             </Link>
 
-            <img src={post && post.image} alt='post image' className="mt-10 p-3 max-h-[600px] w-full object-cover"/>
+            <img src={post && post.image} alt='post image' className="mt-10 p-3 max-h-[600px] md:max-h-[700px] w-full object-contain"/>
 
             <div className="flex justify-between p-3 border-b border-slate-300 mx-auto w-full max-w-2xl text-xs">
 
