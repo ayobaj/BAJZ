@@ -45,7 +45,8 @@ return (
                 </p>
             </div>
 
-            <div className='flex justify-end lg:ml-[1100px] text-reveal mb-9'>
+            <div className='flex justify-end lg:ml-[1100px] text-reveal mb-[45px] md:mb-9 lg:mt-[100px]
+            '>
                     <button className='btn p-4 flex'><FaArrowDown className='text-xl'/></button>
             </div>
 
