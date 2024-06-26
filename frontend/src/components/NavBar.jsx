@@ -53,7 +53,6 @@ const NavBar = () => {
         } else{
             dispatch(signoutUserSuccess());
             navigate('/sign-in');
-            toast.success('Signed out successfully');
             
         }
 
