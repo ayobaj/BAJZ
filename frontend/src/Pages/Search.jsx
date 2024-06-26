@@ -178,7 +178,7 @@ return (
                     <p className="text-center text-xl text-slate-500">No Post Yet!</p>
                 )}
 
-                {loading && <Skeleton/>}
+                {loading && <Skeleton className='p-7 justify-center items-center'/>}
 
                 {!loading && posts && posts.map((post)=> <PostCard key={post._id} post={post}/>)}
 
