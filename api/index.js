@@ -6,19 +6,25 @@ import authRoutes from './routes/authenticateRoute.js';
 import cookieParser from 'cookie-parser';
 import postRoutes from './routes/postRoutes.js'
 import commentRoutes from './routes/commentRoutes.js'
-
+import path from 'path';
 
 dotenv.config();
 const app = express();
 const port = 5000;
 app.use(express.json());
 app.use(cookieParser());
-
+const __dirname = path.resolve();
 
 app.use('/api/user', userRoutes);
 app.use('/api/authenticate', authRoutes);
 app.use('/api/post', postRoutes);
 app.use('/api/comment', commentRoutes);
+
+app.use(express.static(path.join(__dirname, '/client/dist')));
+
+app.get('*', (req, res ) => {
+    res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'))
+})
 
 
 
@@ -46,3 +52,4 @@ mongoose
 app.listen(port, ()=> {
     console.log(`Server is running on port ${port}`)
 })
+
