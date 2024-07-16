@@ -96,6 +96,7 @@ const NavBar = () => {
 
   return (
     <div className="">
+      
       <nav className="flex items-center shadow-md justify-between md:mx-auto p-3">
 
         <div className="flex items-center">

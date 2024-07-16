@@ -15,7 +15,7 @@ const SignUp = () => {
     const navigate = useNavigate();
 
     const handleChange = (e) => {
-        setFormData({...formData, [e.target.id ] : e.target.value})
+        setFormData({...formData, [e.target.id ] : e.target.value.trim()});
     };
     console.log(errorMsg);
 
@@ -60,6 +60,7 @@ const SignUp = () => {
             toast.error(error.message);
         }
     };
+
 
 return (
     <div className='min-h-screen md:mt-16'>

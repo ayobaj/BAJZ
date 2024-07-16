@@ -42,14 +42,13 @@ app.use((err, req, res, next) => {
 
 
 
-
-
 mongoose
 .connect(process.env.MONGO)
 .then(()=> console.log('DataBase is connected!'))
 .catch((err) => {
     console.log(err)
 })
+
 
 app.listen(port, ()=> {
     console.log(`Server is running on port ${port}`)
