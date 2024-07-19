@@ -4,9 +4,7 @@ import ist from '../assets/ist.jpg'
 const About = () => {
 return (
     <div className='bg-white'>
-        <h1 className="text-reveal h-[300px] text-white font-bold md:text-4xl text-2xl  md:p-[70px] p-[80px] mx-auto " style={{ backgroundImage: `url(${abtt})`, backgroundSize: 'cover', backgroundPosition: 'center', }}>
-            
-            TECHNOLOGY, FASHION <br/> AND ENTERTAINMENT </h1>
+        <h1 className="text-reveal h-[300px] text-white font-bold md:text-4xl text-2xl  md:p-[70px] p-[80px] mx-auto " style={{ backgroundImage: `url(${abtt})`, backgroundSize: 'cover', backgroundPosition: 'center', }}></h1>
 
             <div className=' border-indigo-200 '>
                 <h1 className='text-center bg-indigo-300 animate-text-left-to-right border-indigo-200 sm:w-[500px] mt-8 text-2xl mx-auto'>Our fundamental identity revolves around continual growth, 
