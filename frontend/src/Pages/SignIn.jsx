@@ -18,7 +18,7 @@ const SignIn = () => {
     const {loading} = useSelector((state) => state.user);
 
     const handleChange = (e) => {
-        setFormData({...formData, [e.target.id ] : e.target.value})
+        setFormData({...formData, [e.target.id ] : e.target.value}.trim())
     };
 
 
