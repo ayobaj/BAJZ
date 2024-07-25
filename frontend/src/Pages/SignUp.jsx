@@ -17,7 +17,7 @@ const SignUp = () => {
     const handleChange = (e) => {
         setFormData({...formData, [e.target.id ] : e.target.value.trim()});
     };
-    console.log(errorMsg);
+
 
 
     // FORM SUBMISSION TO THE DATABASE
