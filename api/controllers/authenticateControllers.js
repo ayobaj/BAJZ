@@ -13,7 +13,7 @@ export const signup = async (req, res, next) => {
 
         // Check password length
         if (password.length < 6) {
-            throw{statusCode: 400, message: 'Password must be atleast 6 characters '}
+            throw{statusCode: 400, message: 'Password must be atleast 6 characters'}
         }
 
         // Check if username already exists

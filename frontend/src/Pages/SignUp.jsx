@@ -105,6 +105,7 @@ return (
                         type='password'
                         onChange={handleChange}/>
                     </div>
+                    
                     <div> 
                         <button disabled={loading} className='w-full p-3 text-white bg-indigo-500 rounded-lg transition-transform duration-300 ease-in-out hover:scale-105 hover:bg-indigo-600'>
                             {loading ? (
