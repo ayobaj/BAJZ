@@ -28,8 +28,10 @@ export const signup = async (req, res, next) => {
             throw{statusCode: 400, message: 'Email exist already'}
         }
 
+        const saltRounds = 10; 
+
         // Hash the password
-        const hashedPassword = await bcryptjs.hash(password, 10);
+        const hashedPassword = await bcryptjs.hash(password, saltRounds);
 
         // Create a new user
         const newUser = new User({
