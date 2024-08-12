@@ -64,3 +64,4 @@ const userSlice = createSlice({
 export const {signInStart, signInSuccess, signInFailure, updateStart, updateSuccess, updateFailure, deleteUserStart, deleteUserSuccess, deleteUserFailure, signoutUserSuccess} = userSlice.actions;
 
 export default userSlice.reducer;
+//payload contains the user data
