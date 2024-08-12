@@ -30,5 +30,6 @@ export const store = configureStore({
     }),
 });
 
+//passing in the middleware and setting the serializableCheck to false to prevent errors
 
 export const persistor = persistStore(store);
