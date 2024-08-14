@@ -2,7 +2,7 @@ import { AiFillGoogleCircle } from "react-icons/ai";
 import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
 import { app } from "../firebase";
 import { useDispatch } from "react-redux";
-import { signInSuccess } from "../Redux/user/userSlice";
+import { signInSuccess, signInFailure } from "../Redux/user/userSlice";
 import { useNavigate } from "react-router-dom";
 
 
@@ -44,7 +44,8 @@ const OAuth = () => {
             }
 
         } catch(error) {
-            console.error('Google sign-in error:', error);
+            dispatch(signInFailure('Google sign-in error' || error.message))
+
         }
 
     }
