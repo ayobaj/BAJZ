@@ -18,6 +18,7 @@ const OAuth = () => {
         
         const provider = new GoogleAuthProvider();
 
+        //This helps to prevent the pop from not coming up after an account has been selected.
         provider.setCustomParameters({prompt: 'select_account'})
 
         try{
