@@ -80,7 +80,7 @@ return (
                 <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
                     <div>
                         <label className=''>Username</label>
-                        <input placeholder='Username '
+                        <input placeholder='Username'
                         className='md:w-[450px] w-full md:p-3 p-2 rounded-lg'
                         id='username'
                         type='text'
