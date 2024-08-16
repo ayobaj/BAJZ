@@ -41,7 +41,7 @@ app.use((err, req, res, next) => {
 });
 
 
-
+//connection to MONGODB
 mongoose
 .connect(process.env.MONGO)
 .then(()=> console.log('DataBase is connected!'))
