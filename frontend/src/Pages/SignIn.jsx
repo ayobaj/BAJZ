@@ -88,7 +88,7 @@ return (
 
                     <div>
                         <label className=''>Password</label>
-                        <input placeholder='*********'
+                        <input placeholder='Password'
                         className='md:w-[450px] w-full md:p-3 p-2 rounded-lg'
                         id='password'
                         type='password'
