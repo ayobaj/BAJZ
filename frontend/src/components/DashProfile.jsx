@@ -219,7 +219,7 @@ const DashProfile = () => {
 
                 <input hidden type='file' accept='image/*' onChange={handleImageChange} ref={filePicker}/>
                 
-                <div className='relative w-32 h-30 self-center cursor-pointer shadow-md rounded-full overflow-hidden' onClick={()=> filePicker.current.click()}>
+                <div className='relative w-32 h-32 self-center cursor-pointer shadow-md rounded-full overflow-hidden' onClick={()=> filePicker.current.click()}>
 
                     {imageFileUploadProgress && (<CircularProgressbar value={imageFileUploadProgress || 0}
                         text={`${imageFileUploadProgress}%`} 
