@@ -44,7 +44,7 @@ const Dashboard = () => {
             {/* comments */}
             {tab === 'comments' && <DashComment/>}
 
-            {/* dashboard Comp*/}
+            {/* dashboard Overview*/}
             {tab === 'overview' && <DashboardComp/>}
 
     </div>
