@@ -49,7 +49,7 @@ mongoose
     console.log(err)
 })
 
-
+//PORT ON WHICH THE SERVER IS RUNNING
 app.listen(port, ()=> {
     console.log(`Server is running on port ${port}`)
 })
