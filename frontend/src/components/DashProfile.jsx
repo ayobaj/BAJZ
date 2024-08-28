@@ -68,6 +68,8 @@ const DashProfile = () => {
                 setImageFileUploadProgress(progress.toFixed());
             }, 
 
+
+            //HANDLED THE IMAGE UPLOAD ERROR TO FIREBASE WITH A SWITCH CASE
             (error) => {
                 let errorMessage;
                 switch (error.code) {
