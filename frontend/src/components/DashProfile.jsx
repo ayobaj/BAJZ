@@ -53,7 +53,7 @@ const DashProfile = () => {
         }
     }, [imageFile]);
 
-
+    {/*IMAGE UPLOAD FUNCTIONALITY TO FIREBASE WHICH TAKES EFFECT WITH THE USE EFFECT HOOK ABOVE*/}
     const uploadImage = async () => {
         setImageFileUploadError(null);
         const storage = getStorage(app);
