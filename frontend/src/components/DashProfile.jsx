@@ -65,7 +65,7 @@ const DashProfile = () => {
             'state_changed',
             (snapshot) => {
                 const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                setImageFileUploadProgress(progress.toFixed());
+                setImageFileUploadProgress(progress.toFixed(0));
             }, 
 
 
