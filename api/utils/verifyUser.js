@@ -14,6 +14,9 @@ export const verifyToken = (req, res, next) => {
             return next(errorHandler(401, 'Unauthorized'));
         }
 
+        {/*The user is passed with body and cookie to the
+        request and the next middleware call the next function*/}
+        
         req.user = user;
         next();
     });
