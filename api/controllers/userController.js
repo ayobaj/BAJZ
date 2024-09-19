@@ -21,9 +21,9 @@ export const updateUser = async (req, res, next) => {
             return next(errorHandler(400, 'password must be at least 6 characters'))
         }
 
-        const saltRounds = 10;
+        const saltRound = 10;
 
-        req.body.password = bycryptjs.hashSync(req.body.password, saltRounds);
+        req.body.password = bycryptjs.hashSync(req.body.password, saltRound);
     };
 
 
