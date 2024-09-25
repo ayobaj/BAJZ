@@ -54,6 +54,15 @@ const DashProfile = () => {
     }, [imageFile]);
 
     {/*IMAGE UPLOAD FUNCTIONALITY TO FIREBASE WHICH TAKES EFFECT WITH THE USE EFFECT HOOK ABOVE*/}
+
+        {/*RULES FROM FIREBASE 
+        allow read;
+        allow write: if
+        request.resource.size * 2 * 1024 * 1024 
+        && request.resource.contentType.matches('image/.*')
+        */}
+
+
     const uploadImage = async () => {
         setImageFileUploadError(null);
         const storage = getStorage(app);
