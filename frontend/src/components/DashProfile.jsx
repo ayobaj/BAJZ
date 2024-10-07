@@ -41,7 +41,7 @@ const DashProfile = () => {
         const file = e.target.files[0];
 
         if(file){
-            setImageFile(e.target.files[0]);
+            setImageFile(file);
             setImageFileUrl(URL.createObjectURL(file))
         }
 
