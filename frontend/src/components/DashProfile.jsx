@@ -204,7 +204,6 @@ const DashProfile = () => {
             if(!res.ok){
                 const errMsg = data.message || 'Signout failed. Please try again later';
                 toast.error(errMsg);
-                console.error(errMsg);
             } else{
                 dispatch(signoutUserSuccess());
                 toast.success('Signed out successfully');
