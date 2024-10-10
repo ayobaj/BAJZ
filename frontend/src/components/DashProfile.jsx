@@ -212,7 +212,6 @@ const DashProfile = () => {
         } catch(error){
             const errMsg = error.message || 'Signout failed. Please try again later';
             toast.error(errMsg);
-            console.error(errMsg);
         }
     };
 
