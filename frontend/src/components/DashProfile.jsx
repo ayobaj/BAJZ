@@ -309,7 +309,7 @@ const DashProfile = () => {
                             <h3 className='mb-5 text-lg text-slate-500 dark:text-gray-400'>Are you sure you want to delete your account?</h3>
 
                             <div className='flex justify-center gap-4'>
-                                <Button color='failure' onClick={handleDeleteUser}>Yes I'm Sure</Button>
+                                <Button color='failure' onClick={handleDeleteUser}>Yes I&apos;m Sure</Button>
 
                                 <Button onClick={()=> setShowModal(false)} color='gray'>No, Cancel</Button>
                             </div>
