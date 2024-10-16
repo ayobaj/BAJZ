@@ -8,6 +8,9 @@ const PrivateRoute = () => {
 
     return (
         <div>
+
+            {/*I made use of Outlet because it is an alternative instead of passing children into it*/}
+
             {currentUser ? <Outlet/> : <Navigate to='/sign-in'/> }
         </div>
     )
