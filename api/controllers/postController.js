@@ -12,6 +12,8 @@ export const create = async (req, res, next) => {
         return next(errorHandler(400, 'Please provide all required fields'))
     }
 
+    {/*I made use of a slug that carries the post title 
+    instead of the postId because of SEO purpose*/}
     const slug = req.body.title.split(' ').join('-').toLowerCase().replace(/[^a-zA-Z0-9-]/g, '');
 
     const newPost = new Post ({...req.body, slug, userId: req.user.id});
