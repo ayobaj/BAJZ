@@ -108,7 +108,7 @@ return (
                     <OAuth/>
                 </form>
                 <div className='text-sm mt-5'>
-                    <span className='pr-2 '>Don't have an account?</span>
+                    <span className='pr-2 '>Don&apos;t have an account?</span>
                     <Link to='/sign-up' className='text-indigo-500'>Sign up</Link>
                 </div>
 
