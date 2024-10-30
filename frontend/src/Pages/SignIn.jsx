@@ -102,7 +102,7 @@ return (
                                     <Spinner size ='sm'/>
                                     <span className='pl-3'>Loading...</span>
                                 </>
-                            ) : 'SIGN IN'}
+                            ) : 'Sign In'}
                         </button>
                     </div>
                     <OAuth/>
